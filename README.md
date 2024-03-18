@@ -1,0 +1,1 @@
+# full-stack-fastapi-angular-template
