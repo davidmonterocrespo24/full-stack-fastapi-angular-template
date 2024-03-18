@@ -1,29 +1,35 @@
-Repository Name: StarterKit-Angular-FastAPI-Material
+## Repository Name: StarterKit-Angular-FastAPI-Material
 
-Description:
+### Description
 
-Welcome to the StarterKit-Angular-FastAPI-Material repository, your ultimate starting point for developing scalable and robust web projects. This repository is designed to provide you with a solid foundation using modern and powerful technologies such as Angular, Formly.dev, Material Design for Angular, Python with FastAPI, and PostgreSQL as the relational database.
+Welcome to the StarterKit-Angular-FastAPI-Material repository, your ultimate starting point for developing scalable and robust web projects. This repository integrates modern technologies including Angular, Formly.dev, Material Design for Angular, Python with FastAPI, and PostgreSQL as the relational database, providing a comprehensive foundation for your web development endeavors.
 
-Key Features:
+### Key Features
 
-Angular: The Angular frontend development framework provides a solid and modular structure for building dynamic and responsive user interfaces.
+1. **Angular:** A frontend development framework offering a modular structure for building dynamic and responsive user interfaces.
+   
+2. **Formly.dev:** Simplifies form creation in Angular with a clean, declarative syntax and built-in validation features.
+   
+3. **Material Design for Angular:** Utilizes Material Design components specifically tailored for Angular, facilitating the creation of visually appealing and consistent user interfaces.
+   
+4. **FastAPI:** An efficient Python library for building asynchronous web APIs, offering high performance and seamless integration with Angular through native JSON support.
+   
+5. **Python:** A versatile and powerful programming language used for backend development, known for its readability and ease of maintenance.
+   
+6. **PostgreSQL:** A robust relational database solution ensuring data integrity and transactional consistency for storing project data.
 
-Formly.dev: Simplifies form creation in Angular by providing a clean, declarative syntax for defining complex forms with built-in validation.
+### Repository Structure
 
-Material Design for Angular: Utilizes Material Design components specifically designed for Angular to create beautiful and consistent user interfaces with ease.
+- **frontend/:** Contains the source code of the Angular frontend.
+  
+- **backend/:** Includes the codebase for the FastAPI backend developed in Python.
+  
+- **database/:** Houses scripts and configurations related to the PostgreSQL database.
+  
+- **docs/:** Provides comprehensive documentation for getting started with the StarterKit and integrating additional features.
+  
+- **LICENSE:** Open-source license defining the terms of code usage within the repository.
+  
+- **README.md:** Primary documentation file offering an overview of the project, installation instructions, and useful links for developers.
 
-FastAPI: A modern and efficient Python library for creating asynchronous web APIs. FastAPI offers high performance and easy integration with Angular through its native JSON support.
-
-Python: A versatile and powerful programming language used for backend development. Python offers a clear and readable syntax, making code development and maintenance straightforward.
-
-PostgreSQL: As a relational database, PostgreSQL provides a robust and scalable solution for data storage. Its compatibility with ACID ensures data integrity and transactional consistency.
-
-Repository Structure:
-
-frontend/: Contains the source code of the frontend developed with Angular.
-backend/: Here you can find the code of the backend developed with FastAPI and Python.
-database/: Includes scripts and configurations related to the PostgreSQL database.
-docs/: Detailed documentation on getting started with the StarterKit and integrating new features.
-LICENSE: Open-source license defining the terms of use for the code contained in the repository.
-README.md: Main documentation file providing an overview of the project, installation and usage instructions, as well as useful links.
-Join us and start building powerful and scalable web applications with the StarterKit Angular-FastAPI-Material today!
+Begin your journey in building powerful and scalable web applications today with the StarterKit Angular-FastAPI-Material repository!
