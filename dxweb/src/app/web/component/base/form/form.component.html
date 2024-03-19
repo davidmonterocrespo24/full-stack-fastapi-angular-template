@@ -1,0 +1,13 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div *ngFor="let field of fields">
+      <label>{{ field.label }}</label>
+      <input *ngIf="field.type !== 'textarea'; else textareaField"
+             [type]="field.type"
+             [formControlName]="field.key">
+      <ng-template #textareaField>
+        <textarea [formControlName]="field.key"></textarea>
+      </ng-template>
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+  

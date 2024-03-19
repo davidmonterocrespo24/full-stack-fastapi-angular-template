@@ -1,0 +1,10 @@
+
+.container {
+  max-width: 400px;
+  margin: auto;
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 10px;
+}

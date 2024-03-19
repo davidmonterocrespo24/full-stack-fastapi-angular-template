@@ -1,0 +1,13 @@
+<ng-container>
+<app-table
+  [isPageable]="true"
+  [isSortable]="true"
+  [isFilterable]="true"
+  [tableColumns]="tableColumns"
+  [defaultPageSize]="10"
+  [tableData]="userList"
+  [rowActionIcon]="'edit'"
+  (rowAction)="onViewRecord($event)"  
+></app-table>
+</ng-container>
+

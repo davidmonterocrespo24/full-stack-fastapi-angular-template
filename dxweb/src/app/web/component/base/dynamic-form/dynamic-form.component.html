@@ -1,0 +1,10 @@
+<div [formGroup]="form" *ngFor="let field of fieldset$ | async">
+  <div class="margin-bottom">
+    <app-dynamic-fields [field]="field"></app-dynamic-fields>
+  </div>
+</div>
+
+<div *ngIf="form?.value">
+  <p>Form values:</p>
+  <p>{{ form.value | json }}</p>
+</div>

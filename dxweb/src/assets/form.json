@@ -1,0 +1,60 @@
+{
+    "fields": [
+      {
+        "label": "Firstname",
+        "type": "string"
+      },
+      {
+        "label": "Lastname",
+        "type": "string"
+      },
+      {
+        "label": "Age",
+        "type": "number"
+      },
+      {
+        "label": "Gender",
+        "type": "radio",
+        "options": [
+          {
+            "value": "female",
+            "viewValue": "Female"
+          },
+          {
+            "value": "male",
+            "viewValue": "Male"
+          }
+        ]
+      },
+      {
+        "label": "Country",
+        "type": "select",
+        "options": [
+          {
+            "value": "norway",
+            "viewValue": "Norway"
+          },
+          {
+            "value": "sweden",
+            "viewValue": "Sweden"
+          },
+          {
+            "value": "denmark",
+            "viewValue": "Denmark"
+          },
+          {
+            "value": "finland",
+            "viewValue": "Finland"
+          }
+        ]
+      },
+      {
+        "label": "Date of birth",
+        "type": "datepicker"
+      },
+      {
+        "label": "Agree to terms and conditions",
+        "type": "checkbox"
+      }
+    ]
+  }
