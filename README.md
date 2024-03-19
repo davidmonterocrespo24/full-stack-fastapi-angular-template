@@ -20,9 +20,9 @@ Welcome to the StarterKit-Angular-FastAPI-Material repository, your ultimate sta
 
 ### Repository Structure
 
-- **frontend/:** Contains the source code of the Angular frontend.
+- **dxweb/:** Contains the source code of the Angular frontend.
   
-- **backend/:** Includes the codebase for the FastAPI backend developed in Python.
+- **dxbackend/:** Includes the codebase for the FastAPI backend developed in Python.
   
 - **database/:** Houses scripts and configurations related to the PostgreSQL database.
   
