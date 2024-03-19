@@ -38,6 +38,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { UserTableComponent } from './base/user/user-table/user-table.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { UserTableComponent } from './base/user/user-table/user-table.component'
     MatDatepickerModule,
     MatNativeDateModule,
     MatRippleModule,
+    MatTabsModule
   ],
   exports: [FormComponent],
   providers: [],

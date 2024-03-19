@@ -1,7 +1,11 @@
-<mat-toolbar color="primary">
-    <button mat-icon-button (click)="sidenav.toggle()" matTooltip="Menu">
-        <mat-icon>menu</mat-icon>
-    </button>
+<div> 
+    <mat-toolbar color="primary">
+        <div>
+            <button mat-icon-button (click)="sidenav.toggle()">
+              <mat-icon>menu</mat-icon>
+            </button>
+          </div>
+     
     <span>ConcretePage.com</span>
     <span class="toolbar-item-spacer"></span>
     <button mat-icon-button matTooltip="Like">
@@ -49,16 +53,7 @@
                     </a>                    
                 </mat-nav-list>
             </mat-expansion-panel>
-            <mat-expansion-panel [class.mat-elevation-z0]="true">
-                <mat-expansion-panel-header>
-                    Frameworks
-                </mat-expansion-panel-header>
-                <mat-nav-list>
-                    <a mat-list-item routerLink="#">Spring</a>
-                    <a mat-list-item routerLink="#">Hibernate</a>
-                    <a mat-list-item routerLink="#">Struts</a>
-                </mat-nav-list>
-            </mat-expansion-panel>
+           
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
@@ -66,3 +61,4 @@
         </router-outlet>
     </mat-sidenav-content>
 </mat-sidenav-container>
+</div>
