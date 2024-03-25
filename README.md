@@ -33,3 +33,63 @@ Welcome to the StarterKit-Angular-FastAPI-Material repository, your ultimate sta
 - **README.md:** Primary documentation file offering an overview of the project, installation instructions, and useful links for developers.
 
 Begin your journey in building powerful and scalable web applications today with the StarterKit Angular-FastAPI-Material repository!
+
+
+
+### Running the Backend (FastAPI):
+Install Dependencies:
+Ensure you have Python and pip installed on your system. Then, install FastAPI and Uvicorn (an ASGI server) using pip if you haven't already:
+
+```bash
+pip install fastapi uvicorn
+```
+
+### Setup the Backend:
+
+Create your backend using FastAPI. You can follow the example I provided earlier to create a Python file named main.py that defines routes and backend logic.
+Run the Backend Server:
+
+From the terminal, navigate to the directory where your main.py file is located.
+Run the following command to start the server:
+
+```bash
+uvicorn main:app --reload
+```
+
+### Install Angular CLI:
+Make sure you have Node.js and npm installed on your system. Then, install Angular CLI globally if you haven't already:
+
+```bash
+npm install -g @angular/cli
+```
+
+### Setup the Frontend:
+
+Navigate to your Angular project directory.
+Run the following command to start the development server:
+
+```bash
+ng serve --open
+```
+
+This will automatically open your app in the default browser. If it doesn't open automatically, you can access it at http://localhost:4200.
+Interacting with the Project:
+Once both servers are running (the backend on one port, e.g., 8000, and the frontend on another port, e.g., 4200), you can interact with your application by accessing the URL of the frontend server in your browser.
+The frontend will interact with the backend via HTTP requests to the routes defined in your FastAPI server, enabling the full functionality of your application.
+I hope these steps help you successfully run your project! If you encounter any issues, feel free to ask.
+
+<p align="center">
+  <img src="docs/login.png" width="300">
+</p>
+<p align="center">
+  <img src="docs/sign up" width="300">
+</p>
+<p align="center">
+  <img src="docs/user" width="300">
+</p>
+<p align="center">
+  <img src="docs/filter" width="300">
+</p>
+
+
+
