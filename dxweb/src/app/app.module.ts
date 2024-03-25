@@ -23,11 +23,11 @@ import { TopbarComponent } from './share/topbar/topbar.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
-
+import { MatChipsModule } from '@angular/material/chips';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { GenericTableComponent } from './web/component/base/table/generic.table.component';
+import { GenericTableComponent,QueryBuilderDialogComponent } from './web/component/base/table/generic.table.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { DataPropertyGetterPipe } from './web/component/base/table/property/data-property-getter.pipe';
@@ -39,6 +39,12 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { UserTableComponent } from './base/user/user-table/user-table.component';
 import { MatTabsModule } from '@angular/material/tabs';
+import { NgxAngularQueryBuilderModule } from "ngx-angular-query-builder";
+import { FormularioNgxFormlyComponent } from './web/component/base/formulario-ngx-formly/formulario-ngx-formly.component';
+import { FormlyModule } from '@ngx-formly/core';
+import { FormlyMaterialModule } from '@ngx-formly/material';
+
+
 
 @NgModule({
   declarations: [
@@ -49,9 +55,11 @@ import { MatTabsModule } from '@angular/material/tabs';
     SidebarComponent,
     TopbarComponent,
     GenericTableComponent,
+    QueryBuilderDialogComponent,
     DataPropertyGetterPipe,
     FormComponent,
     UserTableComponent,
+    FormularioNgxFormlyComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +69,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    NgxAngularQueryBuilderModule,
     MatCardModule,
     HttpClientModule,
     MatGridListModule,
@@ -82,7 +91,10 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatDatepickerModule,
     MatNativeDateModule,
     MatRippleModule,
-    MatTabsModule
+    MatTabsModule,
+    MatChipsModule,
+    FormlyModule.forRoot(),
+    FormlyMaterialModule
   ],
   exports: [FormComponent],
   providers: [],

@@ -9,8 +9,9 @@ const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'users', component: UserTableComponent },
+  { path: 'user', component: UserTableComponent },
   { path: 'user/edit/:id', component: UserTableComponent },
+  { path: 'user/add', component: UserTableComponent },
   { path: '**', redirectTo: '' }
 ];
 

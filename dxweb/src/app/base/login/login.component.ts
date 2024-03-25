@@ -19,9 +19,12 @@ export class LoginComponent {
    }
 
    login() {
+    console.log('Login');
+    console.log(this.username);
+    console.log(this.password);
     this.authService.login(this.username, this.password).subscribe(
       () => {
-        this.router.navigate(['/users']); // Redirige al usuario a la ruta de la lista de usuarios
+        this.router.navigate(['/user']); // Redirige al usuario a la ruta de la lista de usuarios
       },
       (error) => {
         if (error.status === 0) {

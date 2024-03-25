@@ -5,7 +5,7 @@ import {
   Input,
   OnInit,
   Output,
-  Inject,
+  Inject ,
   inject,
   ViewChild,
 } from '@angular/core';
@@ -20,28 +20,19 @@ import { MatPaginator } from '@angular/material/paginator';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { MatChipEditedEvent, MatChipInputEvent } from '@angular/material/chips';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import {
-  QueryBuilderComponent,
-  QueryBuilderConfig,
-} from 'ngx-angular-query-builder';
-import {
-  MAT_DIALOG_DATA,
-  MatDialog,
-  MatDialogRef,
-} from '@angular/material/dialog';
+import { QueryBuilderComponent, QueryBuilderConfig } from 'ngx-angular-query-builder';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SelectionModel } from '@angular/cdk/collections';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { FormularioNgxFormlyComponent } from '../formulario-ngx-formly/formulario-ngx-formly.component';
 import { User } from 'src/app/models/user';
-import { ActivatedRoute, Router } from '@angular/router';
 
 export interface Fruit {
   name: string;
 }
 
+
 @Component({
   selector: 'app-query-builder-dialog',
-  templateUrl: './query-builder-dialog.component.html',
+  templateUrl: './query-builder-dialog.component.html'
 })
 export class QueryBuilderDialogComponent {
   constructor(
@@ -69,42 +60,41 @@ export class GenericTableComponent implements OnInit, AfterViewInit {
   @Input() isSortable = false;
   @Input() isFilterable = false;
   @Input() tableColumns: TableColumn[];
+  @Input() rowActionIcon: string;
   @Input() paginationSizes: number[] = [5, 10, 15];
   @Input() defaultPageSize = this.paginationSizes[1];
-  @Input() modelName: string= '';
 
   @Output() sort: EventEmitter<Sort> = new EventEmitter();
   @Output() rowAction: EventEmitter<any> = new EventEmitter<any>();
 
+  
   // this property needs to have a setter, to dynamically get changes from parent component
   @Input() set tableData(data: any[]) {
     this.setTableDataSource(data);
   }
 
+
   selection = new SelectionModel<any>(true, []);
 
+  /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
-    console.log("isAllSelected")
     const numSelected = this.selection.selected.length;
     const numRows = this.tableDataSource.data.length;
-    console.log(this.tableDataSource.data.length)
     return numSelected === numRows;
   }
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   toggleAllRows() {
-    console.log("toggleAllRows")
     if (this.isAllSelected()) {
       this.selection.clear();
       return;
     }
-console.log(this.tableDataSource.data)
+
     this.selection.select(...this.tableDataSource.data);
   }
 
   /** The label for the checkbox on the passed row */
   checkboxLabel(row?: User): string {
-    console.log("checkboxLabel")
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
@@ -113,31 +103,31 @@ console.log(this.tableDataSource.data)
 
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
-  fruits: Fruit[] = [{ name: 'Lemon' }, { name: 'Lime' }, { name: 'Apple' }];
+  fruits: Fruit[] = [{name: 'Lemon'}, {name: 'Lime'}, {name: 'Apple'}];
 
   announcer = inject(LiveAnnouncer);
-  formGroup: FormGroup | undefined;
+
   query = {
     condition: 'and',
     rules: [
-      { field: 'age', operator: '<=', value: 'Bob' },
-      { field: 'gender', operator: '>=', value: 'm' },
-    ],
+      {field: 'age', operator: '<=', value: 'Bob'},
+      {field: 'gender', operator: '>=', value: 'm'}
+    ]
   };
 
   config: QueryBuilderConfig = {
     fields: {
-      age: { name: 'Age', type: 'number' },
+      age: {name: 'Age', type: 'number'},
       gender: {
         name: 'Gender',
         type: 'category',
         options: [
-          { name: 'Male', value: 'm' },
-          { name: 'Female', value: 'f' },
-        ],
-      },
-    },
-  };
+          {name: 'Male', value: 'm'},
+          {name: 'Female', value: 'f'}
+        ]
+      }
+    }
+  }
 
   openQueryBuilderDialog(): void {
     const dialogRef = this.dialog.open(QueryBuilderDialogComponent, {
@@ -145,22 +135,22 @@ console.log(this.tableDataSource.data)
       data: {
         // Puedes pasar los datos necesarios al componente del diálogo aquí
         query: this.query,
-        config: this.config,
-      },
+        config: this.config
+      }
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe(result => {
       console.log('El diálogo ha sido cerrado.');
       // Puedes manejar el resultado aquí si es necesario
     });
   }
-
+  
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
     // Add our fruit
     if (value) {
-      this.fruits.push({ name: value });
+      this.fruits.push({name: value});
     }
 
     // Clear the input value
@@ -191,13 +181,12 @@ console.log(this.tableDataSource.data)
     if (index >= 0) {
       this.fruits[index].name = value;
     }
-  }
+  
+}
 
-  constructor(public dialog: MatDialog, private formBuilder: FormBuilder,  private router: Router,
-    private route: ActivatedRoute) {
-    this.tableColumns = [
-      { name: 'Edit', dataKey: 'edit', isSortable: false, position: 'right' },
-    ];
+  constructor(public dialog: MatDialog) {
+    this.tableColumns = [];
+    this.rowActionIcon = '';
     this.displayedColumns = [];
   }
 
@@ -205,10 +194,11 @@ console.log(this.tableDataSource.data)
     const columnNames = this.tableColumns.map(
       (tableColumn: TableColumn) => tableColumn.name
     );
-
-    this.displayedColumns = columnNames;
-
-    this.formGroup = this.formBuilder.group({});
+    if (this.rowActionIcon) {
+      this.displayedColumns = [this.rowActionIcon, ...columnNames];
+    } else {
+      this.displayedColumns = columnNames;
+    }
   }
 
   // we need this, in order to make pagination work with *ngIf
@@ -250,49 +240,7 @@ console.log(this.tableDataSource.data)
     this.rowAction.emit(row);
   }
 
-  //Formulario
-
-  openFormWithNgxFormly(row: any) {
-    const formlyFields = this.generateFormlyFields(row); // Genera los campos de ngx-formly
-    const dialogRef = this.dialog.open(FormularioNgxFormlyComponent, {
-      width: '500px',
-      data: {
-        formFields: formlyFields,
-        rowData: row, // Pasa los datos de la fila al formulario
-      },
-    });
-
-    // Escucha los cambios en el formulario
-    dialogRef.afterClosed().subscribe((result) => {
-      // Maneja el resultado si es necesario
-    });
-  }
-
-  // Método para generar los campos de ngx-formly
-  generateFormlyFields(row: any): any[] {
-    const formlyFields: any[] = [];
-
-    // Itera sobre las columnas de la tabla
-    this.tableColumns.forEach((column) => {
-      // Crea un campo de ngx-formly para cada columna
-      const field = {
-        key: column.dataKey, // Usa el dataKey como clave del campo
-        type: 'input', // Tipo de campo, puedes personalizar según tus necesidades
-        templateOptions: {
-          label: column.name, // Nombre de la columna como etiqueta del campo
-          placeholder: column.name, // Nombre de la columna como marcador de posición del campo
-          required: false, // Puedes definir la propiedad requerida según tus necesidades
-        },
-      };
-
-      // Agrega el campo al array de campos de ngx-formly
-      formlyFields.push(field);
-    });
-
-    return formlyFields;
-  }
-
   openCreateForm() {
-    this.router.navigate(['/', this.modelName, 'add']);
   }
+  
 }

@@ -1,0 +1,12 @@
+<mat-card>
+    <mat-card-content>
+<h2>Filter</h2>
+<query-builder [(ngModel)]="data.query" [config]="data.config"></query-builder>
+
+<div class="actions">
+  <button mat-button  >Cancel</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="data.query">Accept</button>
+</div>
+
+</mat-card-content>
+</mat-card>

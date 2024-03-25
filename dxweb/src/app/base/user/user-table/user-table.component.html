@@ -1,13 +1,29 @@
-<ng-container>
-<app-table
-  [isPageable]="true"
-  [isSortable]="true"
-  [isFilterable]="true"
-  [tableColumns]="tableColumns"
-  [defaultPageSize]="10"
-  [tableData]="userList"
-  [rowActionIcon]="'edit'"
-  (rowAction)="onViewRecord($event)"  
-></app-table>
+<mat-card>
+  <mat-card-content>
+    <h2>Usuarios</h2>
+<ng-container *ngIf="!showFormView">
+  <app-table
+    [isPageable]="true"
+    [isSortable]="true"
+    [isFilterable]="true"
+    [tableColumns]="tableColumns"
+    [defaultPageSize]="10"
+    [modelName]= "'user'"
+    [tableData]="userList"
+    (rowAction)="onViewRecord($event)"  
+  ></app-table>
 </ng-container>
 
+<ng-container *ngIf="showFormView">
+  <!-- Mostrar el formulario cuando showFormView es verdadero -->
+  <div>
+    <h2>Nuevo Usuario</h2>
+    <!-- Aquí va el formulario de creación -->
+    <!-- Por ejemplo, puedes usar el componente FormularioNgxFormlyComponent aquí -->
+    <app-formulario-ngx-formly [formFields]="formFields" [rowData]="selectedRecordData"></app-formulario-ngx-formly>
+ 
+  </div>
+</ng-container>
+
+</mat-card-content>
+</mat-card>

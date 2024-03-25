@@ -1,54 +1,93 @@
 <ng-container>
 
-    <!-- Filter -->
-    <ng-container *ngIf="isFilterable" [matColumnDef]="rowActionIcon">
+
+  <div style="display: flex; justify-content: flex-end;">
+    <button mat-raised-button color="primary" (click)="openCreateForm()"
+      style="margin-bottom: auto; margin-top: auto; margin-left: 20px;">Create</button>
+    <div style="margin-left: auto;">
+      <mat-form-field class="example-chip-list" style="width: 1000px; margin-left: auto;">
+        <mat-label>Search</mat-label>
+        <mat-chip-grid #chipGrid aria-label="Enter fruits">
+          <mat-chip-row *ngFor="let fruit of fruits" (removed)="remove(fruit)" [editable]="true"
+            (edited)="edit(fruit, $event)" [aria-description]="'press enter to edit ' + fruit.name">
+            {{fruit.name}}
+            <button matChipRemove [attr.aria-label]="'remove ' + fruit.name">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
+          <input placeholder="New fruit..." [matChipInputFor]="chipGrid"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="add($event)" />
+        </mat-chip-grid>
+      </mat-form-field>
+    </div>
+  </div>
+  <div style="display: flex; justify-content: flex-end; margin-right: 20px; margin-top: -10px;">
+    <button mat-raised-button (click)="openQueryBuilderDialog()">Filter</button>
+  </div>
+
+
+  <!-- Filter -->
+  <!--ng-container *ngIf="isFilterable" [matColumnDef]="rowActionIcon">
       <mat-form-field>
         <mat-label>Filter</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="filter">
       </mat-form-field>
-    </ng-container>
-  
-    <!-- Table -->
-    <table mat-table [dataSource]="tableDataSource" matSort (matSortChange)="sortTable($event)">
-  
-      <!-- action column -->
-      <ng-container *ngIf="rowActionIcon?.length" [matColumnDef]="rowActionIcon">
-        <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let element" [id]="rowActionIcon" (click)="emitRowAction(element)">
-          <button mat-button>
-            <mat-icon>plus_one</mat-icon>
-          </button>
-        </td>
-      </ng-container>
-      <ng-container *ngFor="let tableColumn of tableColumns" [matColumnDef]="tableColumn.name">
-  
-        <!-- if sortable column header -->
-        <ng-container *ngIf="tableColumn.isSortable; else notSortable">
-          <th mat-header-cell *matHeaderCellDef [mat-sort-header]="tableColumn.name"
-              [arrowPosition]="tableColumn.position === 'right' ? 'before' : 'after'">
-            {{tableColumn.name}}
+    </ng-container!-->
+
+  <mat-card style="margin-left: 10px; margin-right: 10px;margin-top: 10px;">
+    <mat-card-content>
+      <!-- Table -->
+      <table class="ng-star-inserted" mat-table [dataSource]="tableDataSource" matSort
+        (matSortChange)="sortTable($event)">
+        
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                          [checked]="selection.hasValue() && isAllSelected()"
+                          [indeterminate]="selection.hasValue() && !isAllSelected()"
+                          [aria-label]="checkboxLabel()">
+            </mat-checkbox>
           </th>
+          <td mat-cell *matCellDef="let row">
+            <mat-checkbox (click)="$event.stopPropagation()"
+                          (change)="$event ? selection.toggle(row) : null"
+                          [checked]="selection.isSelected(row)"
+                          [aria-label]="checkboxLabel(row)">
+            </mat-checkbox>
+          </td>
         </ng-container>
-        <!-- else not sortable -->
-        <ng-template #notSortable>
-          <th mat-header-cell *matHeaderCellDef [class.text-right]="tableColumn.position == 'right'">
-            {{tableColumn.name}}
-          </th>
-        </ng-template>
-  
-        <!-- column data -->
-        <td mat-cell *matCellDef="let element" [class.text-right]="tableColumn.position == 'right'">
-          {{element | dataPropertyGetter: tableColumn.dataKey}}
-        </td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-  
-    <!-- Pagination -->
-    <mat-paginator *ngIf="isPageable"
-                   [pageSizeOptions]="paginationSizes"
-                   [pageSize]="defaultPageSize"
-                   showFirstLastButtons>
-    </mat-paginator>
-  </ng-container>
+      
+
+
+        <ng-container *ngFor="let tableColumn of tableColumns" [matColumnDef]="tableColumn.name">
+
+          <!-- if sortable column header -->
+          <ng-container *ngIf="tableColumn.isSortable; else notSortable">
+            <th mat-header-cell *matHeaderCellDef [mat-sort-header]="tableColumn.name"
+              [arrowPosition]="tableColumn.position === 'right' ? 'before' : 'after'">
+              {{tableColumn.name}}
+            </th>
+          </ng-container>
+          <!-- else not sortable -->
+          <ng-template #notSortable>
+            <th mat-header-cell *matHeaderCellDef [class.text-right]="tableColumn.position == 'right'">
+              {{tableColumn.name}}
+            </th>
+          </ng-template>
+
+          <!-- column data -->
+          <td mat-cell *matCellDef="let element" [class.text-right]="tableColumn.position == 'right'">
+            {{element | dataPropertyGetter: tableColumn.dataKey}}
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"  (click)="selection.toggle(row)"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+  <!-- Pagination -->
+  <mat-paginator *ngIf="isPageable" [pageSizeOptions]="paginationSizes" [pageSize]="defaultPageSize"
+    showFirstLastButtons>
+  </mat-paginator>
+</ng-container>
