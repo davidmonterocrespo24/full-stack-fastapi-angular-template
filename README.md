@@ -82,13 +82,13 @@ I hope these steps help you successfully run your project! If you encounter any 
   <img src="docs/login.png" width="300">
 </p>
 <p align="center">
-  <img src="docs/sign up" width="300">
+  <img src="docs/sign up.png" width="300">
 </p>
 <p align="center">
-  <img src="docs/user" width="300">
+  <img src="docs/user.png" width="300">
 </p>
 <p align="center">
-  <img src="docs/filter" width="300">
+  <img src="docs/filter.png" width="300">
 </p>
 
 
