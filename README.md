@@ -79,16 +79,16 @@ The frontend will interact with the backend via HTTP requests to the routes defi
 I hope these steps help you successfully run your project! If you encounter any issues, feel free to ask.
 
 <p align="center">
-  <img src="docs/login.png" width="300">
+  <img src="docs/login.png">
 </p>
 <p align="center">
-  <img src="docs/sign up" width="300">
+  <img src="docs/sign up.png" >
 </p>
 <p align="center">
-  <img src="docs/user" width="300">
+  <img src="docs/user.png" >
 </p>
 <p align="center">
-  <img src="docs/filter" width="300">
+  <img src="docs/filter.png" >
 </p>
 
 
