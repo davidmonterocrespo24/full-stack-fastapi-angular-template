@@ -1,36 +1,25 @@
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Component,Input } from '@angular/core';
-import { UserService } from 'src/app/base/service/user.service';
-import { FormField } from 'src/app/web/component/base/form/interface/form-field.interface';
-import { TableColumn } from 'src/app/web/component/base/table/interface/table.column';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormlyFieldConfig } from '@ngx-formly/core';
+import { FormField } from 'src/app/web/component/base/form/interface/form-field.interface';
+import { UserService } from '../../service/user.service';
+import { TableColumn } from 'src/app/web/component/base/mat-custom-table/models/tableColumn';
 
 @Component({
   selector: 'app-user-table',
   templateUrl: './user-table.component.html',
   styleUrls: ['./user-table.component.sass'],
 })
-export class UserTableComponent {
+export class UserTableComponent implements OnInit{
   @Input() data: FormField[] = [];
 
   userList: any[] = [];
-  tableColumns: TableColumn[] = [
-    {
-      name: 'Selection',
-      dataKey: 'select',
-      isSortable: false,
-      position: 'left',
-    },
 
-    { name: 'ID', dataKey: 'id', position: 'left', isSortable: true },
-    {
-      name: 'Username',
-      dataKey: 'username',
-      position: 'left',
-      isSortable: true,
-    },
-    { name: 'Email', dataKey: 'email', position: 'left', isSortable: true },
+  tableColumns: TableColumn[] = [
+    { columnDef: 'id', header: 'id'},
+    { columnDef: 'username',    header: 'Username' },
+    { columnDef: 'email', header: 'Email'},
   ];
 
   selectedRecordData: any;
@@ -44,8 +33,7 @@ export class UserTableComponent {
     { key: 'email', label: 'email', type: 'email', required: true },
   ];
 
-
-  formFields: FormlyFieldConfig[] = []
+  formFields: FormlyFieldConfig[] = [];
   ////////////////////////////////////////////
 
   constructor(
@@ -55,9 +43,14 @@ export class UserTableComponent {
     private route: ActivatedRoute
   ) {
     this.selectedRecordForm = this.formBuilder.group({});
+    this.getUsers();
+    console.log('UserTableComponent', this.userList);
   }
 
   ngOnInit(): void {
+    console.log('UserTableComponent ngOnInit');
+    this.getUsers();
+    console.log('UserTableComponent', this.userList);
     this.route.url.subscribe((urlSegments) => {
       this.showFormView = urlSegments.some(
         (segment) => segment.path === 'edit'
@@ -67,26 +60,54 @@ export class UserTableComponent {
     this.route.params.subscribe((params) => {
       this.userId = +params['id']; // Obtener el ID del usuario de los parámetros de ruta
       this.getUsers();
+      console.log('UserTableComponent 2', this.userList);
     });
 
     //Add in URL
     this.route.url.subscribe((urlSegments) => {
-      this.showFormView = urlSegments.some(
-        (segment) => segment.path === 'add'
-      );
+      this.showFormView = urlSegments.some((segment) => segment.path === 'add');
     });
     this.formFields = this.generateFormlyFields();
   }
 
   getUsers() {
-    this.userService.getUsers().subscribe(
+    /*this.userService.getUsers().subscribe(
       (users: any[]) => {
         this.userList = users;
+        console.log('UserTableComponent 3', this.userList);
       },
       (error) => {
         console.error('Error fetching users:', error);
       }
-    );
+    );*/
+
+    this.userList =[
+      {
+          "id": 1,
+          "username": "usuario_ejemplo",
+          "email": "correo@example.com"
+      },
+      {
+          "id": 2,
+          "username": "david",
+          "email": "as@asd"
+      },
+      {
+          "id": 6,
+          "username": "u2suario_2ejemplo",
+          "email": "co2rreo@example.com"
+      },
+      {
+          "id": 8,
+          "username": "davidsdfsdf",
+          "email": "sdfsdfsdf"
+      },
+      {
+          "id": 9,
+          "username": "davidsdfsdfas",
+          "email": "sdfsdfsdf@sdf"
+      }
+  ]
   }
 
   onViewRecord(record: any) {
@@ -110,12 +131,12 @@ export class UserTableComponent {
     this.tableColumns.forEach((column, index) => {
       // Crea un campo de ngx-formly para cada columna
       const field = {
-        key: column.dataKey, // Usa el dataKey como clave del campo
+        key: column.columnDef, // Usa el dataKey como clave del campo
         type: 'input', // Tipo de campo, puedes personalizar según tus necesidades
         className: index % 2 === 0 ? 'col-6' : 'col-6', // Alterna entre columnas de 6 y 3 basado en el índice
         templateOptions: {
-          label: column.name, // Nombre de la columna como etiqueta del campo
-          placeholder: column.name, // Nombre de la columna como marcador de posición del campo
+          label: column.header, // Nombre de la columna como etiqueta del campo
+          placeholder: column.header, // Nombre de la columna como marcador de posición del campo
           required: false, // Puedes definir la propiedad requerida según tus necesidades
         },
       };
@@ -134,10 +155,8 @@ export class UserTableComponent {
       }
     });
 
-
     return formlyFields;
   }
-
 
   generateFormlyFields2(): any[] {
     const formlyFields: any[] = [];
@@ -146,11 +165,11 @@ export class UserTableComponent {
     this.tableColumns.forEach((column) => {
       // Crea un campo de ngx-formly para cada columna
       const field = {
-        key: column.dataKey, // Usa el dataKey como clave del campo
+        key: column.columnDef, // Usa el dataKey como clave del campo
         type: 'input', // Tipo de campo, puedes personalizar según tus necesidades
         templateOptions: {
-          label: column.name, // Nombre de la columna como etiqueta del campo
-          placeholder: column.name, // Nombre de la columna como marcador de posición del campo
+          label: column.header, // Nombre de la columna como etiqueta del campo
+          placeholder: column.header, // Nombre de la columna como marcador de posición del campo
           required: false, // Puedes definir la propiedad requerida según tus necesidades
         },
       };
@@ -162,5 +181,7 @@ export class UserTableComponent {
     return formlyFields;
   }
 
-
+  onTableAction(event: any) {
+    console.log('event', event)
+  }
 }
